@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Custom Image + Center Text</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #111;
+        color: white;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    .controls {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: rgba(0,0,0,0.6);
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    #displayImage {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90vw;
+        max-height: 90vh;
+    }
+
+    #centerText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 48px;
+        text-align: center;
+        pointer-events: none;
+        white-space: pre-wrap;
+    }
+
+    /* Creator Button */
+    #creatorBtn {
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        background: #222;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        border: 1px solid #444;
+        transition: 0.2s;
+    }
+    #creatorBtn:hover {
+        background: #333;
+    }
+
+    /* Popup */
+    #creatorPopup {
+        position: fixed;
+        bottom: 60px;
+        right: 15px;
+        background: rgba(0,0,0,0.85);
+        padding: 15px;
+        border-radius: 8px;
+        width: 220px;
+        display: none;
+        border: 1px solid #444;
+    }
+
+    #creatorPopup a {
+        color: #4da3ff;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="controls">
+    <label>Image Embed Link:</label><br>
+    <input type="text" id="imgInput" placeholder="Paste image URL..." style="width: 250px;"><br><br>
+
+    <label>Center Text:</label><br>
+    <input type="text" id="textInput" placeholder="Enter text..." style="width: 250px;"><br><br>
+
+    <label>Font:</label><br>
+    <select id="fontSelect">
+        <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Impact">Impact</option>
+        <option value="Times New Roman">Times New Roman</option>
+    </select><br><br>
+
+    <button onclick="applyImage()">Add Image</button>
+    <button onclick="applyText()">Add Text</button>
+</div>
+
+<img id="displayImage" src="" alt="">
+<div id="centerText"></div>
+
+<!-- Creator Button -->
+<div id="creatorBtn" onclick="toggleCreator()">Creator</div>
+
+<!-- Popup -->
+<div id="creatorPopup">
+    <b>Created by:</b><br>
+    Oxy<br><br>
+
+    <b>Socials:</b><br>
+    <a href="https://discord.gg/Rb2zs92n" target="_blank">Discord</a><br>
+    <a href="https://instagram.com/ihaveoxy" target="_blank">Instagram</a><br>
+</div>
+
+<script>
+function applyImage() {
+    const url = document.getElementById("imgInput").value;
+    document.getElementById("displayImage").src = url;
+}
+
+function applyText() {
+    const text = document.getElementById("textInput").value;
+    const font = document.getElementById("fontSelect").value;
+
+    const textBox = document.getElementById("centerText");
+    textBox.style.fontFamily = font;
+    textBox.textContent = text;
+}
+
+function toggleCreator() {
+    const popup = document.getElementById("creatorPopup");
+    popup.style.display = popup.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</body>
+</html>
